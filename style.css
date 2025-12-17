@@ -1,0 +1,352 @@
+:root {
+    --mc-green: #55FF55;
+    --mc-cyan: #00FFFF;
+    --mc-purple: #AA00AA;
+    --mc-red: #FF5555;
+    --mc-gold: #FFAA00;
+    --mc-diamond: #4EE2EC;
+    --mc-dark: #0A0A12;
+    --mc-darker: #050508;
+    --mc-black: #000000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--mc-darker);
+    color: white;
+    font-family: 'Orbitron', 'Segoe UI', sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* ПИКСЕЛЬНЫЙ ТЕКСТ */
+@font-face {
+    font-family: 'Minecraft';
+    src: url('https://fonts.cdnfonts.com/s/14748/Minecraft.woff') format('woff');
+}
+.pixel-text {
+    font-family: 'Minecraft', 'Courier New', monospace;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-smooth: never;
+    -webkit-font-smoothing: none;
+}
+
+/* ФОН С СНЕГОМ */
+#snow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.3;
+}
+
+/* 3D МИР НА ЗАДНЕМ ПЛАНЕ */
+#world-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.4;
+}
+#scene-container {
+    width: 100%;
+    height: 100%;
+}
+
+/* ОСНОВНОЙ КОНТЕНТ */
+.content-wrapper {
+    position: relative;
+    z-index: 3;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    backdrop-filter: blur(2px);
+}
+
+header {
+    text-align: center;
+    padding: 40px 0 60px;
+    position: relative;
+}
+.logo {
+    font-size: 5rem;
+    color: var(--mc-cyan);
+    text-shadow: 4px 4px 0 var(--mc-black), 0 0 30px var(--mc-cyan);
+    margin-bottom: 10px;
+    animation: glow 3s infinite alternate;
+}
+@keyframes glow {
+    0% { text-shadow: 4px 4px 0 var(--mc-black), 0 0 20px var(--mc-cyan); }
+    100% { text-shadow: 4px 4px 0 var(--mc-black), 0 0 40px var(--mc-green), 0 0 60px var(--mc-diamond); }
+}
+.tagline {
+    font-size: 1.5rem;
+    color: var(--mc-green);
+    margin-bottom: 30px;
+}
+.server-ip {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(0,0,0,0.6);
+    padding: 15px 30px;
+    border-radius: 12px;
+    border: 2px solid var(--mc-green);
+    font-size: 1.3rem;
+}
+.server-ip code {
+    font-family: 'Minecraft', monospace;
+    color: var(--mc-cyan);
+    font-size: 1.5rem;
+    padding: 5px 10px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 5px;
+}
+
+/* КНОПКИ */
+.icon-btn, .contact-btn {
+    border: none;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+.icon-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--mc-green), var(--mc-cyan));
+    color: var(--mc-black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+.icon-btn:hover {
+    transform: scale(1.1) rotate(10deg);
+    box-shadow: 0 0 25px var(--mc-cyan);
+}
+.contact-btn {
+    padding: 18px 36px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 220px;
+    justify-content: center;
+}
+.contact-btn:hover {
+    transform: translateY(-5px);
+}
+.vk-btn {
+    background: linear-gradient(135deg, #0077FF, #0044AA);
+    color: white;
+    border: 2px solid #0077FF;
+}
+.tg-btn {
+    background: linear-gradient(135deg, #0088CC, #005588);
+    color: white;
+    border: 2px solid #0088CC;
+}
+
+/* СЕТКА ПРИВИЛЕГИЙ */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 60px 0;
+}
+.product-card {
+    background: rgba(20, 20, 30, 0.85);
+    border-radius: 16px;
+    padding: 30px;
+    border: 3px solid;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+}
+.product-card:hover {
+    transform: translateY(-15px) scale(1.03);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    z-index: 10;
+}
+.product-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    transition: left 0.7s;
+}
+.product-card:hover::before {
+    left: 100%;
+}
+
+/* ЦВЕТА КАРТОЧЕК */
+.card-vip { border-color: #FF5555; }
+.card-premium { border-color: #55FF55; }
+.card-elite { border-color: #FFFF55; }
+.card-master { border-color: #FFAA00; }
+.card-overlord { border-color: #AA00AA; }
+.card-omega { border-color: #FF55FF; }
+.card-apex { border-color: #00AAAA; }
+.card-boss {
+    border-color: #FFAA00;
+    background: linear-gradient(135deg, rgba(26,26,46,0.9), rgba(22,33,62,0.9));
+    grid-column: span 2;
+}
+.card-boss .product-name {
+    font-size: 2.8rem;
+    background: linear-gradient(45deg, #FFAA00, #FF5500);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* ВНУТРЕННОСТИ КАРТОЧКИ */
+.product-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.product-name {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: inherit;
+}
+.product-price {
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--mc-gold);
+    text-shadow: 2px 2px 0 #000;
+}
+
+/* ГЛАВНАЯ КНОПКА "КУПИТЬ" - RIPPLE ЭФФЕКТ[citation:3] */
+.buy-button {
+    width: 100%;
+    padding: 18px;
+    margin-top: 20px;
+    background: #222;
+    color: white;
+    text-decoration: none;
+    border: 2px solid currentColor;
+    border-radius: 10px;
+    font-family: 'Minecraft', sans-serif;
+    font-size: 1.4rem;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+}
+.buy-button:hover {
+    background: #333;
+    letter-spacing: 1.5px;
+}
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    animation: ripple-animation 0.8s ease-out;
+}
+@keyframes ripple-animation {
+    from {
+        width: 0;
+        height: 0;
+        opacity: 0.7;
+    }
+    to {
+        width: 500px;
+        height: 500px;
+        opacity: 0;
+    }
+}
+
+/* СЕКЦИЯ УСЛУГ */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 800px;
+    margin: 40px auto;
+}
+.service-card {
+    background: rgba(30, 30, 40, 0.9);
+    padding: 30px;
+    border-radius: 16px;
+    border: 3px solid var(--mc-cyan);
+    text-align: center;
+}
+.service-card h3 {
+    color: var(--mc-cyan);
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+.service-price {
+    font-size: 2.8rem;
+    color: var(--mc-gold);
+    margin: 20px 0;
+    font-weight: 900;
+}
+
+/* ФУТЕР */
+.contact-section {
+    text-align: center;
+    padding: 60px 20px;
+    margin-top: 60px;
+    background: rgba(5,5,8,0.8);
+    border-radius: 20px;
+    border-top: 4px solid var(--mc-green);
+}
+.section-title {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    color: var(--mc-cyan);
+    text-shadow: 3px 3px 0 #000;
+}
+.contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin: 40px 0;
+}
+.copyright {
+    margin-top: 40px;
+    color: #888;
+    font-size: 0.9rem;
+}
+
+/* АДАПТИВНОСТЬ */
+@media (max-width: 1100px) {
+    .card-boss { grid-column: span 1; }
+}
+@media (max-width: 768px) {
+    .logo { font-size: 3.5rem; }
+    .section-title { font-size: 2.5rem; }
+    .products-grid { grid-template-columns: 1fr; }
+    .contact-links { flex-direction: column; align-items: center; }
+    .server-ip { flex-direction: column; gap: 10px; }
+}
